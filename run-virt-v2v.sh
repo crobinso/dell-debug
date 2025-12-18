@@ -21,6 +21,11 @@ if [ ! -b "$BLOCK_DEVICE" ]; then
     exit 1
 fi
 
+if [ ! -w "$BLOCK_DEVICE" ]; then
+    echo "Error: No write access to $BLOCK_DEVICE" >&2
+    exit 1
+fi
+
 echo "Creating symlink: $LINK_PATH -> $BLOCK_DEVICE"
 ln -sf "$BLOCK_DEVICE" "$LINK_PATH"
 
